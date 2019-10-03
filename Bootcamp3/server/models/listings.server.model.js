@@ -7,13 +7,19 @@ var mongoose = require('mongoose'),
 /* Create your schema */
 var listingSchema = new Schema({
   /* your code here from Bootcamp Assignment #2 - ListingSchema.js File*/
-    
+  code: {type: String, required: true},
+  name: {type: String, required: true},
+  coordinates: {latitude: Number, longitude: Number},
+  address: String
 });
 
 /* create a 'pre' function that adds the updated_at and created_at if not already there property */
 listingSchema.pre('save', function(next) {
   /* your code here from Bootcamp Assignment #2 - ListingSchema.js File */
-
+  listingSchema.add({ updated_at: Date, created_at: Date});
+  var currentDate = new Date();
+  this.updated_at = currentDate;
+  this.created_at = currentDate;
   next();
 });
 
